@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang=en>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <title>share with the brethren</title>
+        
+        <!-- external links -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link href="https://fonts.googleapis.com/css?family=Lato:100,300,300i,400" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Rozha+One" rel="stylesheet">
+        
+        <!-- custom css -->
+        <link rel="stylesheet" type="text/css" href="/resources/css/style.css">
+    </head>
+    <body>
+      
+        <header class="top" id="home">
+           <div class="background-img"> <img src="resources/img/a4.jpg" alt="white" class="img-responsive trans"> </div>
+            <div class="home-text">
+                <h1>SAVED?</h1>
+            </div>
+        </header>
+        
+        <div class="js--waypoint"></div>
+        <div class="nav-filler"></div>
+        <nav class="navbar navbar-inverse js--navi">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span> 
+              </button>
+              <a class="navbar-brand" href="/">WebSiteName</a>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+              <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Home</a></li>
+                <li><a href="#">Page 1</a></li>
+                <li><a href="#">Page 2</a></li> 
+                <li><a href="#">Page 3</a></li> 
+              </ul>
+              <ul class="nav navbar-nav navbar-right">
+                <% if(currentUser){ %>
+                  <li><a href="/<%= currentUser.username%>"><%=currentUser.username%></a> </li>
+                  <li><a href="/logout">logout</a></li>
+                <% } else{ %>
+                  <li><a href="/register"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                  <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                <% } %>
+              </ul>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="container">
+            <% if(error && error.length > 0){ %>
+                <div class="alert alert-danger" role="alert">
+                    <%= error %>
+                </div>
+            <% } else if(success && success.length > 0){ %>
+                <div class="alert alert-success" role="alert">
+                    <%= success %>
+                </div>
+            <% } %>
+        </div>
+
+        
+        <section class="section-tv js--section-tv">
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-5 tv-errors">
+                <img src="/resources/img/tv-errors_use22.svg" class="img-responsive right-img per-img" alt="tv corruption">
+                <div class="clearfix"></div>
+              </div>
+              <div class="col-sm-7">
+                <div class="side-para">
+                  <h3>The Devil in Plain Sight</h3>
+                  <h4>Mainstream television, the devil's propaganda machine</h4>
+                  <p>
+                    Do you ever get the feeling that something is terribly wrong with mainstream entertainment and content? Well, your gut feeling might not be too far from the truth!<br><br>
+                    <i>"Abstain from all appearance of evil."</i><br>
+                    <span class="right">1 Thessalonians 5:22</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class="section-sin big-screen">
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-7">
+                <div class="side-para">
+                  <h3>The Secrets We Treasure</h3>
+                  <h4>Our secret sins, the devil's source of blackmail</h4>
+                  <p>
+                    Is there a secret sin in your life, keeping you away from your Maker, giving the enemy the licence to torment you with guilt and afflictions? <br><br>
+                    <i>"People who conceal their sins will not prosper, but if they confess and turn from them, they will receive mercy."</i><br>
+                    <span class="right">Proverbs 28:13</span>
+                  </p>
+                </div>
+              </div>
+              <div class="col-sm-5 tv-errors">
+                <img src="/resources/img/secret_sin.svg" class="img-responsive left-img per-img" alt="secret sin">
+                <div class="clearfix"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class="section-sin small-screen">
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-5 tv-errors">
+                <img src="/resources/img/secret_sin.svg" class="img-responsive left-img per-img" alt="secret sin">
+                <div class="clearfix"></div>
+              </div>
+              <div class="col-sm-7">
+                <div class="side-para">
+                  <h3>The Secrets We Treasure</h3>
+                  <h4>Our secret sins, the devil's source of blackmail</h4>
+                  <p>
+                    Is there a secret sin in your life, keeping you away from your Maker, giving the enemy the licence to torment you with guilt and afflictions? <br><br>
+                    <i>"People who conceal their sins will not prosper, but if they confess and turn from them, they will receive mercy."</i><br>
+                    <span class="right">Proverbs 28:13</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class="section-pride">
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-5 tv-errors">
+                <img src="/resources/img/pride.svg" class="img-responsive right-img per-img" alt="sea of unbelief">
+                <div class="clearfix"></div>
+              </div>
+              <div class="col-sm-7">
+                <div class="side-para">
+                  <h3>Cloud of Pride</h3>
+                  <h4>Pride, the trigger for self destruction</h4>
+                  <p>
+                    Do you take pride in your education, beauty, talent, possession etc? Remember that you didn't create yourself, neither did you acheive anything in your life by your own works alone.<br>
+                    Pride is a tool used by the devil to make man steal God's glory for himself.<br><br>
+                    <i>"Do you see a man wise in his own eyes? There is more hope for a fool than for him."</i><br>
+                    <span class="right">Proverbs 26:12</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+         <section class="section-fear big-screen">
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-7">
+                <div class="side-para">
+                  <h3>Shadow of Fear</h3>
+                  <h4>Fear, the speed limit on life</h4>
+                  <p>
+                    Fear in forms of anxiety, depression, phobias and any other form it comes, is of the devil. It only has dominion over them that do not believe.<br> Fear has no place in the life of a child of God.<br><br>
+                    <i>"Peace I leave with you; my peace I give you. I do not give to you as the world gives. Do not let your hearts be troubled and do not be afraid."</i><br>
+                    <span class="right">John 14:27</span>
+                  </p>
+                </div>
+              </div>
+              <div class="col-sm-5 tv-errors">
+                <img src="/resources/img/fear.svg" class="img-responsive left-img per-img" alt="secret sin">
+                <div class="clearfix"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class="section-fear small-screen">
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-5 tv-errors">
+                <img src="/resources/img/fear.svg" class="img-responsive right-img per-img" alt="secret sin">
+                <div class="clearfix"></div>
+              </div>
+              <div class="col-sm-7">
+                <div class="side-para">
+                  <h3>Shadow of Fear</h3>
+                  <h4>Fear, the speed limit on life</h4>
+                  <p>
+                    Fear in forms of anxiety, depression, phobias and any other form it comes, is of the devil. It only has dominion over them that do not believe.<br> Fear has no place in the life of a child of God.<br><br>
+                    <i>"Peace I leave with you; my peace I give you. I do not give to you as the world gives. Do not let your hearts be troubled and do not be afraid."</i><br>
+                    <span class="right">John 14:27</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class="section-unbelief">
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-5 tv-errors">
+                <img src="/resources/img/drowning.svg" class="img-responsive right-img per-img" alt="secret sin">
+                <div class="clearfix"></div>
+              </div>
+              <div class="col-sm-7">
+                <div class="side-para">
+                  <h3>Sea of Unbelief</h3>
+                  <h4>Unbelief, the devil's secret weapon</h4>
+                  <p>
+                    Are you a victim of the devil's lies and deciet; leading you to believe that there is no God and that Jesus Christ didn't die on the cross to pay the price for your sins and rose on the third day? This is one of his oldest tricks. Dont fall for it<br><br>
+                    <i>"He that believes and is baptized shall be saved; but he that believes not shall be condemned."</i><br>
+                    <span class="right">Mark 16:16</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class="section-saved big-screen">
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-7">
+                <div class="side-para">
+                  <h3>SEVED!!!</h3>
+                  <h4>Jesus Christ, the only savior</h4>
+                  <p>
+                    It dosen't matter what your sins are or what your afflictions are; Jesus Christ will save you fully and give you eternal life.<br>
+                    If you are not yet saved, Jesus said in the bible:<br><br>
+                    <i>"For God so loved the world that He gave His only begotten Son, that whoever believes in Him should not perish but have everlasting life."</i><br>
+                    <span class="right">John 3:16</span><br>
+                    He also said;<br>
+                    <i>"if you love Me, you will keep My commandments.<br>And I will pray the Father, and He will give you another Helper, that He may abide with you forever-the Spirit of truth, whom the world cannot receive, because it neither sees Him 
+                    nor knows Him; but you know Him, for He dwells with you and will be in you."</i><br>
+                    <span class="right">John 14:15-17</span><br>
+                  </p>
+                </div>
+              </div>
+              <div class="col-sm-5 tv-errors">
+                <img src="/resources/img/saved.svg" class="img-responsive left-img per-img" alt="secret sin">
+                <div class="clearfix"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class="section-saved small-screen">
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-5 tv-errors">
+                <img src="/resources/img/saved.svg" class="img-responsive right-img per-img" alt="secret sin">
+                <div class="clearfix"></div>
+              </div>
+              <div class="col-sm-7">
+                <div class="side-para">
+                  <h3>SEVED!!!</h3>
+                  <h4>Jesus Christ, the only savior</h4>
+                  <p>
+                    It dosen't matter what your sins are or what your afflictions are; Jesus Christ will save you fully and give you eternal life.<br>
+                    If you are not yet saved, Jesus said in the bible:<br><br>
+                    <i>"For God so loved the world that He gave His only begotten Son, that whoever believes in Him should not perish but have everlasting life."</i><br>
+                    <span class="right">John 3:16</span><br>
+                    He also said;<br>
+                    <i>"if you love Me, you will keep My commandments.<br>And I will pray the Father, and He will give you another Helper, that He may abide with you forever-the Spirit of truth, whom the world cannot receive, because it neither sees Him 
+                    nor knows Him; but you know Him, for He dwells with you and will be in you."</i><br>
+                    <span class="right">John 14:15-17</span><br>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class="section-unbelief">
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-5 tv-errors">
+                <img src="/resources/img/fellowship.svg" class="img-responsive right-img" alt="secret sin">
+                <div class="clearfix"></div>
+              </div>
+              <div class="col-sm-7">
+                <div class="side-para">
+                  <h3>A Community about Jesus</h3>
+                  <h4>Have a question or something to share?</h4>
+                  <p>
+                    Welcome to a community of people who have found grace and favor in the sight of the Almighty God in Christ Jesus.<br>
+                    Want to be a part of this community?<br><br>
+                    <a href="/register"><button type="button" class="btn btn-primary">Join</button></a>
+                    <a href="/feeds"><button type="button" class="btn btn-success">Explore</button></a>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
+        <script src="/resources/js/script.js"></script>
+        
+    </body>
+</html>

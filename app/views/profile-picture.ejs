@@ -1,0 +1,14 @@
+<% include ./partials/header %>
+
+<div class="conatainer">
+    <h1>Update profile picture</h1>
+    <form action="/profile-img-upload?_method=PUT" method="POST" enctype="multipart/form-data">
+        <label class="custom-file">
+          <input type="file" name="profilePic" class="custom-file-input">
+          <span class="custom-file-control"></span>
+        </label>
+        <button type="submit" class="btn">upload</button>
+    </form>
+</div>
+
+<% include ./partials/footer %>

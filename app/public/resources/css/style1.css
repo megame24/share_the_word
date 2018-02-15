@@ -1,0 +1,89 @@
+body {
+    background-color: #ededed;
+}
+
+/*=====================================*/
+/*---------MAIN-NAVIGATION-------------*/
+/*=====================================*/
+
+
+.margin-top {
+    margin-top: 60px;
+}
+
+/*=====================================*/
+/*---------PROFILE PAGE-------------*/
+/*=====================================*/
+
+
+.section-profile {
+    padding-top: 0px;
+}
+
+.cont-ainer {
+    width: 80%;
+    margin: 0 auto;
+}
+
+@media only screen and (max-width: 767px) {
+    .cont-ainer {
+        width: 100%;
+    }
+}
+
+.no-pad {
+    padding: 0;
+    margin: 0;
+}
+
+.white-box {
+    background-color: #fff;
+    width: 100%;
+    border: 7px solid #ededed;
+    padding: 10px;
+}
+
+.personal-details img {
+    width: 70%;
+    margin: 0 auto;
+}
+
+.feed img {
+    width: 100%;
+    height: auto;
+    margin: 0 auto;
+}
+
+.post-owner {
+    margin-bottom: 5px;
+    position: relative;
+}
+
+.post-owner img {
+    width: 46px;
+    position: absolute;
+    left: 0px;
+    top: 5px;
+}
+
+.post-owner .name {
+    letter-spacing: 1px;
+    margin-left: 57px;
+}
+
+.post-owner .date {
+    font-size: 80%;
+    color: #939393;
+    margin-left: 57px;
+}
+
+.post-owner .right {
+    position: absolute;
+    top: 10px;
+    right: 0;
+    font-size: 70%;
+}
+
+.post-owner .right a {
+    color: #f4f4f4;
+}

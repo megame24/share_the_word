@@ -1,0 +1,275 @@
+
+/*=====================================*/
+/*-----------BASIC SETUP---------------*/
+/*=====================================*/
+
+/*html {*/
+/*    -webkit-box-sizing: border-box;*/
+/*    -moz-box-sizing: border-box;*/
+/*    box-sizing: border-box;*/
+/*    margin: 0;*/
+/*    padding: 0;*/
+/*}*/
+
+/*=====================================*/
+/*-----------BASIC SETUP---------------*/
+/*=====================================*/
+
+* {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body, h1, h2, h3, h4, h5, a:link {
+    font-family: 'Lato', sans-serif;
+    font-size: 20px;
+    font-weight: 300;
+    text-rendering: optimizeLegibility;
+    color: #414141;
+}
+
+.clearfix:after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+section {
+    padding: 70px 0;
+}
+
+html, body {
+    overflow-x: hidden;
+}
+
+h1, h2, h4, h3 {
+    margin-top: 0;
+}
+
+h1 {
+    font-size: 250%;
+    word-spacing: 4px;
+    letter-spacing: 1px;
+    margin-bottom: 30px;
+}
+
+h2 {
+    font-size: 140%;
+    letter-spacing: 1px;
+    word-spacing: 3px;
+    margin-bottom: 10px;
+}
+
+h3 {
+    font-weight: 400;
+    text-transform: none;
+    font-size: 130%;
+    word-spacing: 2px;
+    margin-bottom: 10px;
+}
+
+h4 {
+    font-weight: 400;
+    font-size: 105%;
+    word-spacing: 2px;
+    margin-bottom: 5px;
+}
+
+h5 {
+    font-size: 110%;
+    word-spacing: 1px;
+    margin-bottom: 20px;
+}
+
+
+.trans {
+    opacity: 0;
+    min-height: 29rem;
+    width: 100%;
+}
+
+.top .background-img {
+    background-image: url(../img/g890.png);
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+}
+.top {
+    min-height: 29rem;
+}
+.home-text h1 {
+    position: absolute;
+    margin: 0;
+    top: 31rem;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: #fff;
+    font-family: 'Rozha One', serif;
+    text-shadow: 2px 2px 2px #000;
+    font-size: 500%;
+}
+
+.top .btn:first-of-type {
+    margin-right: 10px;
+}
+
+
+/*=====================================*/
+/*---------MAIN-NAVIGATION-------------*/
+/*=====================================*/
+
+/*--main-navi--*/
+.navbar {
+    margin-bottom: 0;
+    z-index: 99999;
+}
+
+
+
+.affix {
+    top: 0;
+    width: 100%;
+  }
+
+ Padding for a smoth affix 
+.affix + .container-fluid {
+  padding-top: 72px;
+}
+
+/*=====================================*/
+/*---------SECTION-TV-------------*/
+/*=====================================*/
+
+.tv-errors img[class="per-img"] {
+    height: 75%;
+    width: 75%;
+    margin-left: 0;
+    padding: 0;
+}
+
+.tv-errors {
+    margin: 0;
+}
+
+.side-para {
+    width: 90%;
+    margin-top: 20px;
+    margin-left: 30px;
+}
+
+.right {
+    display: block;
+    width: 100%;
+    text-align: right;
+}
+
+.small-screen {
+    display: none;
+}
+.left-img {
+    float: left;
+}
+
+.right-img {
+    float: right;
+}
+
+@media only screen and (max-width: 1200px) {
+    .tv-errors img {
+        height: 90%;
+        width: 90%;
+    }
+    section {
+        padding: 60px 0;
+    }
+}
+
+@media only screen and (max-width: 991px) {
+    .tv-errors img {
+        height: 100%;
+        width: 100%;
+        margin-top: 20px;
+    }
+    section {
+        padding: 50px 0;
+    }
+    html, body, a:link {
+        font-size: 19px;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .small-screen {
+        display: block;
+    }
+    .big-screen {
+        display: none;
+    }
+    .tv-errors img {
+        margin: 0 auto;
+    }
+    .side-para {
+        width: 100%;
+        margin-top: 30px;
+        margin-left: 3px;
+    }
+    section {
+        padding: 40px 0;
+    }
+    .left-img {
+        float: none;
+    }
+    .right-img {
+        float: none;
+    }
+    .tv-errors img {
+        height: 75%;
+        width: 75%;
+    }
+    section {
+        padding: 30px 0;
+    }
+    .home-text h1 {
+        top: 26rem;
+    }
+}
+
+
+@media (min-width: 768px) {
+    .navbar {
+        border-radius: 0;
+    }
+}
+
+.navbar-inverse {
+    background-color: #313131;
+    border-color: #313131;
+}
+
+
+.nav-filler {
+    content: ' ';
+    height: 50px;
+    display: none;
+}
+
+
+@media (min-width: 992px) {
+    .top {
+        height: 100vh; }
+    .trans {
+        height: 100vh; } 
+}
+
+.js--waypoint {
+    content: " ";
+}
+
+.section-saved {
+    background-image: url("/resources/img/g1877.png");
+    background-size: cover;
+}

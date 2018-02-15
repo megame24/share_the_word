@@ -1,0 +1,19 @@
+<% include ./partials/header %>
+
+<h1> Welcome to the feeds page</h1>
+
+<div>
+    <% if(posts !== undefined) {%>
+        <% posts.forEach(function(post){ %>
+            <h3><%=post.title%></h3>
+            <img src="./uploads/<%=post.image%>">
+            <p><%=post.text%></p>
+            <p><%=post.owner.username%></p>
+        <% }) %>
+    <% } %>
+</div>
+
+<% include ./partials/footer %>
+
+
+

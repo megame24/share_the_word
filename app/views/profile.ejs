@@ -1,0 +1,107 @@
+<% include ./partials/header %>
+
+<section class="section-profile">
+    <div class="container cont-ainer">
+        <div class="row">
+            <div class="col-sm-3 no-pad">
+                <div class="personal-details white-box">
+                    <div class="profile-picture">
+                        <img src=<%=profile.profilePicture%> class="img-responsive" alt="profile-picture">
+                        <% if(currentUser && currentUser.username == profile.owner.username){ %>
+                            <a href="/profile-img-upload">update profile picture</a>
+                        <% } %>
+                    </div>
+                    <p class="person-name"><%=profile.owner.username%></p>
+                    <h3 class=>Intro</h3>
+                </div>
+            </div>
+            <div class="col-sm-6 no-pad">
+                <% if(currentUser && currentUser.username == profile.owner.username){ %>
+                    <div class="feed-form white-box">
+                        <form action="/post" method="POST" enctype="multipart/form-data">
+                            <input type="text" class="form-control" name="title" placeholder="Title">
+                            <textarea class="form-control" name="text" placeholder="Have a question, a testimony or something to share?"></textarea>
+                            <input type="file" name="postPic" class="custom-file-input">
+                            <button class="btn btn-lg btn-primary btn-block">Submit!</button>
+                        </form>
+                    </div>
+                <% } %>
+                <div class="feeds">
+                    <% if(profile.posts[0] !== undefined) {%>
+                        <% var posts = profile.posts %>
+                        <% for(var i = posts.length - 1; i >= 0; i--) { %>
+                            <% var post = posts[i] %>
+                            <div class="feed white-box">
+                                <div class="post-owner">
+                                    <img src=<%=profile.profilePicture%> class="img-responsive" alt="profile-picture">
+                                    <a href="/<%=profile.owner.username%>" class="name"><b><%=profile.owner.username%></b></a>
+                                    <p class="date"><%=post.date%></p>
+                                    <% if(currentUser && currentUser.username == profile.owner.username){ %>
+                                        <p class="right"><a href="/post/<%=post._id%>/edit" class="btn btn-xs btn-warning">edit</a> &nbsp; <form action="/post/<%=post._id%>/delete?_method=DELETE" method="POST"><button class="btn btn-xs btn-danger">delete</button></form></p>
+                                    <% } else {%>
+                                        <p class="right"><a href="/report" class="btn btn-xs btn-danger">report</a></p>
+                                    <% } %>
+                                </div>
+                                <h3><%=post.title%></h3>
+                                <p><%=post.text%></p>
+                                <% if(post.image !== null) { %>
+                                    <img src=<%=post.image%> class="img-responsive">
+                                <% } %>
+                                <div class="post-comment">
+                                    <form action="/comment/<%=post._id%>" method="POST">
+                                        <textarea name="text" class="form-control" placeholder="leave a comment"></textarea>
+                                        <button class="btn btn-primary btn-block">Submit!</button>
+                                    </form>
+                                    <% if(post.comments[0] !== undefined) { %>
+                                        <% var comments = post.comments %>
+                                        <% comments.forEach(function(comment){ %>
+                                            <!--<img src="./uploads/<%=comment.ownerImage%>" class="img-responsive" alt="owner-image">-->
+                                            <!--<a href="#"><%=comment.owner.username%></a>-->
+                                            <p><%=comment.text%></p><p><a href="/comment/<%=comment._id%>/edit" class="btn btn-xs btn-warning">edit</a> &nbsp; <form action="/comment/<%=comment._id%>/delete?_method=DELETE" method="POST"><button class="btn btn-xs btn-danger">delete</button></form></p>
+                                            <div class="comment-reply" style="width: 95%; margin-left: 5%">
+                                                <form action="/reply/<%=comment._id%>" method="POST">
+                                                    <textarea name="text" class="form-control" placeholder="reply to comment"></textarea>
+                                                    <button class="btn btn-primary btn-block">Submit!</button>
+                                                </form>
+                                                <% if(comment.replies[0] !== undefined) { %>
+                                                    <% var replies = comment.replies %>
+                                                    <% replies.forEach(function(reply){ %>
+                                                        <!--<img src="./uploads/<%=reply.ownerImage%>" class="img-responsive" alt="owner-image">-->
+                                                        <!--<a href="#"><%=reply.owner.username%></a>-->
+                                                        <p><%=reply.text%></p><p><a href="/reply/<%=reply._id%>/edit" class="btn btn-xs btn-warning">edit</a> &nbsp; <a href="/reply/<%=reply._id%>/delete" class="btn btn-xs btn-danger">delete</a></p>
+                                                        <div class="reply's-reply" style="width: 95%; margin-left: 5%">
+                                                            <form action="/reply/<%=comment._id%>/<%=reply._id%>" method="POST">
+                                                                <textarea name="text" class="form-control" placeholder="reply to comment"></textarea>
+                                                                <button class="btn btn-primary btn-block">Submit!</button>
+                                                            </form>
+                                                            <% if(reply.replies[0] !== undefined) { %>
+                                                                <% var replies1 = reply.replies %>
+                                                                <% replies1.forEach(function(reply1){ %>
+                                                                    <p><%=reply1.text%></p><p><a href="/reply/<%=reply._id%>/<%=reply1._id%>/edit" class="btn btn-xs btn-warning">edit</a> &nbsp; <a href="/reply/<%=reply._id%>/<%=reply1._id%>/delete" class="btn btn-xs btn-danger">delete</a></p>
+                                                                <% }); %>
+                                                            <% } %>
+                                                        </div>
+                                                    <% }); %>
+                                                <% } %>
+                                            </div>
+                                        <% }); %>
+                                        
+                                    <% } %>
+                                </div>
+                            </div>
+                        <% } %>
+                    <% } %>
+                </div>
+            </div>
+            <div class="col-sm-3 no-pad">
+                <div class="api white-box">
+                    <p>api</p>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</section>
+
+
+<% include ./partials/footer %>

@@ -1,0 +1,9 @@
+<% include ./partials/header %>
+
+<form action="/comment/<%=comment._id%>/edit?_method=PUT" method="POST">
+    <textarea name="text" class="form-control" placeholder="leave a comment"><%=comment.text%></textarea>
+    <button class="btn btn-primary btn-block">Submit!</button>
+</form>
+              
+
+<% include ./partials/footer %>

@@ -1,0 +1,20 @@
+<% include ./partials/header %>
+
+<form action="/post/<%=post._id%>/edit?_method=PUT" method="POST" enctype="multipart/form-data">
+    <input type="text" class="form-control" name="title" placeholder="Title" value="<%=post.title%>">
+    <textarea class="form-control" name="text" placeholder="Have a question, a testimony or something to share?"><%=post.text%></textarea>
+    <% if(post.image !== undefined && post.image !== "" && post.image !== null) { %>
+        <div class="edit-image" style="width: 200px">
+            <img src=<%=post.image%> class="img-responsive" alt="post-image">
+        </div>
+        <p><a class="btn btn-xs btn-warning js--replace">replace</a> &nbsp; <a class="btn btn-xs btn-danger js--delete">delete</a></p>
+        <input type="text" name="image?" value="true" style="display: none">
+    <% } else { %>
+            <input type="text" name="image?" value="false" style="display: none">
+    <% } %>
+    <input type="file" name="postPic" class="custom-file-input"> 
+    <button class="btn btn-lg btn-primary btn-block js--check-all">Submit!</button>
+</form>
+              
+
+<% include ./partials/footer %>
