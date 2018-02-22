@@ -68,7 +68,7 @@
                                                     <% replies.forEach(function(reply){ %>
                                                         <!--<img src="./uploads/<%=reply.ownerImage%>" class="img-responsive" alt="owner-image">-->
                                                         <!--<a href="#"><%=reply.owner.username%></a>-->
-                                                        <p><%=reply.text%></p><p><a href="/reply/<%=reply._id%>/edit" class="btn btn-xs btn-warning">edit</a> &nbsp; <a href="/reply/<%=reply._id%>/delete" class="btn btn-xs btn-danger">delete</a></p>
+                                                        <p><%=reply.text%></p><p><a href="/reply/<%=reply._id%>/edit" class="btn btn-xs btn-warning">edit</a> &nbsp; <form action="/reply/<%=reply._id%>/delete?_method=DELETE" method="POST"><button class="btn btn-xs btn-danger">delete</button></form></p>
                                                         <div class="reply's-reply" style="width: 95%; margin-left: 5%">
                                                             <form action="/reply/<%=comment._id%>/<%=reply._id%>" method="POST">
                                                                 <textarea name="text" class="form-control" placeholder="reply to comment"></textarea>
@@ -77,7 +77,7 @@
                                                             <% if(reply.replies[0] !== undefined) { %>
                                                                 <% var replies1 = reply.replies %>
                                                                 <% replies1.forEach(function(reply1){ %>
-                                                                    <p><%=reply1.text%></p><p><a href="/reply/<%=reply._id%>/<%=reply1._id%>/edit" class="btn btn-xs btn-warning">edit</a> &nbsp; <a href="/reply/<%=reply._id%>/<%=reply1._id%>/delete" class="btn btn-xs btn-danger">delete</a></p>
+                                                                    <p><%=reply1.text%></p><p><a href="/reply/<%=reply._id%>/<%=reply1._id%>/edit" class="btn btn-xs btn-warning">edit</a> &nbsp; <form action="/reply/<%=reply._id%>/<%=reply1._id%>/delete?_method=DELETE" method="POST"><button class="btn btn-xs btn-danger">delete</button></form></p>
                                                                 <% }); %>
                                                             <% } %>
                                                         </div>

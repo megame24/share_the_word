@@ -9,12 +9,13 @@ var multer = require("multer");
 var path = require("path");
 var fs = require('file-system');
 var cloudinary = require('cloudinary');
+var devEnviro = require('../config/devEnviro');
 
 
 cloudinary.config({ 
-  cloud_name: 'cloud_name', 
-  api_key: 'api_key', 
-  api_secret: 'api_secret' 
+  cloud_name: devEnviro.cloudinaryConfig.cloud_name, 
+  api_key: devEnviro.cloudinaryConfig.api_key, 
+  api_secret: devEnviro.cloudinaryConfig.api_secret 
 });
 
 
@@ -92,15 +93,26 @@ router.post("/", function(req, res){
                   if(err){
                     console.log(err);
                   } else {
-                    Profile.findOne({"owner.username" : res.locals.currentUser.username}, function(err, profile){
-                      if(err){
-                        console.log(err);
-                      } else {
-                        profile.posts.push(post._id);
-                        profile.save();
+                    console.log('1');
+                    Profile.findOneAndUpdate(
+                      {"owner.username" : res.locals.currentUser.username},
+                      { $push: { posts: post._id } },
+                      {new: true},
+                      function (err, profile) {
+                        if(err) console.log(err); 
+                        console.log(profile);
                         res.redirect("/" + profile.owner.username);
-                      }
                     });
+                    // Profile.findOne({"owner.username" : res.locals.currentUser.username}, function(err, profile){
+                    //   if(err){
+                    //     console.log(err);
+                    //   } else {
+                    //     console.log(profile);
+                    //     profile.posts.push(post._id);
+                    //     profile.save();
+                    //     res.redirect("/" + profile.owner.username);
+                    //   }
+                    // });
                   }
                 });
                 fs.unlink("public/uploads/" + req.file.filename);
@@ -124,15 +136,29 @@ router.post("/", function(req, res){
           if(err){
             console.log(err);
           } else {
-            Profile.findOne({"owner.username" : res.locals.currentUser.username}, function(err, profile){
-              if(err){
-                console.log(err);
-              } else {
-                profile.posts.push(post._id);
-                profile.save();
+            console.log('1');
+            Profile.findOneAndUpdate(
+              {"owner.username" : res.locals.currentUser.username},
+              { $push: { posts: post._id } },
+              {new: true},
+              function (err, profile) {
+                if(err) console.log(err); 
+                console.log(profile);
                 res.redirect("/" + profile.owner.username);
-              }
             });
+            // Profile.findOne({"owner.username" : res.locals.currentUser.username}, function(err, profile){
+            //   if(err){
+            //     console.log(err);
+            //   } else {
+            //     profile.posts.push(post._id);
+            //     console.log(profile);
+            //     save(profile, function(){
+            //       console.log(profile);
+            //       res.redirect("/" + profile.owner.username);
+            //     });
+                
+            //   }
+            // });
           }
         });
       }
@@ -142,6 +168,14 @@ router.post("/", function(req, res){
     
 });
 
+// function save(profile, cb){
+//   profile.save(function(err){
+//     if(err){
+//       console.log(err);
+//     }
+//   });
+//   cb();
+// }
 
 router.get("/:id/edit", function(req, res){
   Post.findById(req.params.id, function(err, post){
@@ -156,16 +190,19 @@ router.get("/:id/edit", function(req, res){
 router.delete("/:id/delete", function(req, res){
   
   //find a way to delete the comments and remove schema references when calling a delete route !important
-  
+
   Post.findById(req.params.id, function(err, post){
     if(err){
       console.log(err);
     } else {
-        if(post.image !== null){
-          cloudinary.v2.uploader.destroy(post.image_id, function(error, result){console.log(result)});
-          if(post.comments.length !== 0) {
-            post.comments.forEach(function(id){
-              removeComments(id, function(){
+        Profile.findOneAndUpdate(
+          {'owner.username': post.owner.username},
+          {$pull: {posts: post._id}},
+          function(err, profile){
+            if(err) console.log(err);
+            cloudinary.v2.uploader.destroy(post.image_id, function(error, result){console.log(result)});
+            if(post.comments.length !== 0) {
+              removeComments(post, function(){
                 Post.findByIdAndRemove(req.params.id, function(err) {
                     if(err){
                       console.log(err);
@@ -174,44 +211,48 @@ router.delete("/:id/delete", function(req, res){
                     }
                 });
               });
-            });
-          }
-        } else {
-          Post.findByIdAndRemove(req.params.id, function(err){
-            if(err){
-              console.log(err);
             } else {
-              res.redirect("/" + req.user.username);
+                Post.findByIdAndRemove(req.params.id, function(err) {
+                    if(err){
+                      console.log(err);
+                    } else {
+                      res.redirect("/" + req.user.username);
+                    }
+                });
             }
-          });
-        }
+          }
+        );
     }
   });
   
 });
 
-function removeComments(id, cb) {
-  Comment.findById(id, function(err, comment){
-    if(err) console.log(err);
-    else {
-      if(comment.replies.length !== 0) {
-        var doAndCb = function(cb) {
-          comment.replies.forEach(function(id){
-            removeReply(id);
-          });
-          cb();
-        };
-        doAndCb(function(){
-          Comment.findByIdAndRemove(id, function(err){
-            if(err) console.log(err);
-          });
-        });
-      } else {
-        Comment.findByIdAndRemove(id, function(err){
-          if(err) console.log(err);
-        });
+function removeComments(post, cb) {
+  post.comments.forEach(function(id){
+    Comment.findById(id, function(err, comment){
+      if(err) console.log(err);
+      else {
+        if(comment !== null && comment !== undefined){
+          if(comment.replies.length !== 0) {
+            var doAndCb = function(cb) {
+              comment.replies.forEach(function(id){
+                removeReply(id);
+              });
+              cb();
+            };
+            doAndCb(function(){
+              Comment.findByIdAndRemove(id, function(err){
+                if(err) console.log(err);
+              });
+            });
+          } else {
+            Comment.findByIdAndRemove(id, function(err){
+              if(err) console.log(err);
+            });
+          }
+        }
       }
-    }
+    });
   });
   cb();
 }
@@ -220,22 +261,24 @@ function removeReply(id) {
   Reply.findById(id, function(err, reply){
     if(err) console.log(err);
     else {
-      if(reply.replies.length !== 0) {
-        var doAndCb = function(cb) {
-          reply.replies.forEach(function(id){
-            removeReply1(id);
+      if(reply !== null && reply !== undefined) {
+        if(reply.replies.length !== 0) {
+          var doAndCb = function(cb) {
+            reply.replies.forEach(function(id){
+              removeReply1(id);
+            });
+            cb();
+          };
+          doAndCb(function(){
+            Reply.findByIdAndRemove(id, function(err){
+              if(err) console.log(err);
+            });
           });
-          cb();
-        };
-        doAndCb(function(){
+        } else {
           Reply.findByIdAndRemove(id, function(err){
             if(err) console.log(err);
           });
-        });
-      } else {
-        Reply.findByIdAndRemove(id, function(err){
-          if(err) console.log(err);
-        });
+        }
       }
     }
   });

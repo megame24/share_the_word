@@ -17,8 +17,14 @@ var indexRoutes = require("./routes/index"),
     commentRoutes = require("./routes/comment"),
     replyRoutes = require("./routes/reply");
 
+var devEnviro = require('./config/devEnviro');
+
 //connect to mongoose
-mongoose.connect("mongodb://localhost/db_name", {useMongoClient: true});
+mongoose.Promise = global.Promise;
+mongoose.connect(devEnviro.database.uri, {useMongoClient: true}, (err) => {
+    if(err) console.log(err);
+    else console.log(`connected to database: ${devEnviro.database.db}`);
+});
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(morgan("dev"));
@@ -54,6 +60,6 @@ app.use("/post", postRoutes);
 app.use("/", commentRoutes);
 app.use("/", replyRoutes);
 
-app.listen(process.env.PORT, process.env.IP, function(){
-   console.log("server started..."); 
+app.listen(3000, function(){
+   console.log("server started, listening at port 3000"); 
 });

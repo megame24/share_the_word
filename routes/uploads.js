@@ -7,12 +7,13 @@ var Post = require("../models/post");
 var path = require("path");
 var fs = require('file-system');
 var cloudinary = require('cloudinary');
+var devEnviro = require('../config/devEnviro');
 
 
 cloudinary.config({ 
-  cloud_name: 'cloud_name', 
-  api_key: 'api_key', 
-  api_secret: 'api_secret' 
+  cloud_name: devEnviro.cloudinaryConfig.cloud_name, 
+  api_key: devEnviro.cloudinaryConfig.api_key, 
+  api_secret: devEnviro.cloudinaryConfig.api_secret 
 });
 
 // cloudinary.v2.uploader.upload("./public/uploads/defaultPP.png", 
